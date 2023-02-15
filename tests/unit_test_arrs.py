@@ -50,10 +50,10 @@ class TestMySlice(unittest.TestCase):
         end = None
         self.assertEqual(my_slice(array, start, end), [])
 
-    def test_my_slice_start_greater_than_length(self):
+    def test_my_slice_start_greater_than_end(self):
         array = [1, 2, 3, 4]
-        start = 5
-        end = None
+        start = 3
+        end = 1
         self.assertEqual(my_slice(array, start, end), [])
 
     def test_my_slice_normalized_start(self):
@@ -62,6 +62,32 @@ class TestMySlice(unittest.TestCase):
         end = 3
         expected_result = [3, 4]
         assert my_slice(array, start, end) == expected_result
+
+    def test_my_slice_normalized_end(self):
+        array = [1, 2, 3, 4, 5]
+        start = 2
+        end = -1
+        expected_result = [3, 4]
+        self.assertEqual(my_slice(array, start, end), expected_result)
+
+    def test_my_slice_normalized_start_and_end(self):
+        array = [1, 2, 3, 4, 5]
+        start = -3
+        end = -1
+        expected_result = [3, 4]
+        self.assertEqual(my_slice(array, start, end), expected_result)
+
+    def test_my_slice_start_out_of_range(self):
+        array = [1, 2, 3, 4]
+        start = 5
+        end = None
+        self.assertEqual(my_slice(array, start, end), [])
+
+    def test_my_slice_end_out_of_range(self):
+        array = [1, 2, 3, 4]
+        start = 2
+        end = 10
+        self.assertEqual(my_slice(array, start, end), [3, 4])
 
 if __name__ == '__main__':
     unittest.main()
